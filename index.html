@@ -55,14 +55,14 @@
         <div id="modal">    
             <div id="modal-inner"> 
                 
-                <h3> #BIGTEEN (not the porn thing) </h3>
+                <h1> #BIGTEEN (not the porn thing) </h1>
+
+                <p style="color:#555555; font-style:italic;">bigTEEN.zone is a web application that lets users control YouTube video playback parameters via MIDI protocol</p>
 
                 <ul>
-                    <li> use the #BIGTEEN search bar to search for a YouTube video </li>
+                    <li> connect USB MIDI device, then reload bigTEEN.zone </li>
 
-                    <li> the drop-down menu below the video player will display the top 5 results matching yr search terms </li>
-
-                    <li> click on a playback function icon below to assign a MIDI control ~ reassign a MIDI control simply by clicking again </li>
+                    <li> click on a playback parameter icon below && then move a knob/button on yr MIDI controller to assign it to a plackback function ~~ reassign the parameter  by clicking && moving a new knob/button </li>
 
                     <li>functions are, in order of the icons below:
                         <ul id="sublist">
@@ -79,9 +79,16 @@
                         </ul>
                     </li>
 
-                    <li> playback rate, loop size, && volume are all control values from 0 - 127 </li>
+                    <li> playback rate, loop size, && volume are control values 0-127 (knobs); all other parameters are on/off (buttons) </li>
 
-                    <li> set yr loop size before you set yr loop control to avoid the black hole of infinitely tiny youtubes </li>
+                    <li> don't forget to set yr loop size before you trigger a loop so that you don't try to make a loop without a size ! </li>
+
+                    <li> tip: the longer the video is, the more it has to buffer && smaller loops will take longer to load or may not load at all</li>
+
+                    <li> use the #BIGTEEN search bar to search for a YouTube video </li>
+
+                    <li> the drop-down menu below the video player will display the top 5 results matching yr search terms; select a title to begin playback </li>
+
                 </ul>
 
                 <button id="close">close</button>
