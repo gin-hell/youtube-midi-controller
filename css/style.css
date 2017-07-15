@@ -1,0 +1,171 @@
+
+
+html {
+    background-color: #555555;
+    font-family: sans-serif;
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+p, h3 {
+    color: #ff89db;
+}
+
+li, #modal-inner2 > li {
+    list-style-type: circle;
+    color: #555555;
+    margin:10px auto;
+}
+
+#sublist > li {
+    list-style-type: disc;
+    margin-top: auto;
+    font-size: 10pt;
+    margin: 2px;
+}
+
+img {
+    margin: 0px 10px;
+    cursor: pointer;
+}
+
+#header {
+    margin: 0px;
+    cursor: default;
+}
+
+#player {
+    margin: 10px auto;
+    border: #ff89db 5px solid;
+    border-radius: 5px;
+}
+
+#container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+.time {
+    height: 300px;
+    width: 100px;
+    margin: auto;
+    margin-top: 50px; 
+    text-align: center;
+}
+
+#R {
+    font-size: 32pt;
+    transform: rotateZ(90deg);
+    /*margin: 50px;*/
+}
+
+#L {
+    font-size: 32pt;
+    transform: rotateZ(-90deg);
+}
+
+.div-stuff, #icons {
+    height: auto;
+    margin:  auto;
+    text-align: center;
+}
+
+#query {
+    /*margin: 10px auto;*/
+    color: #ff89db;
+    width: 500px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 24pt;
+    padding-left: 5px;
+}
+
+button {
+    cursor: pointer;
+}
+
+#loop-size {
+    cursor: pointer;
+    vertical-align: top;
+    line-height: 50px;
+    font-size: 16pt;
+}
+
+#button {
+    height: 47px;
+    width: 120px;
+    border-radius: 10px;
+    font-size: 24pt;
+}
+
+#button, #close, #close2 {
+    color: #ff89db;
+}
+
+#selector, #inputselector {
+    font-size: 12pt;
+    background-color: #ff89db;
+    display: block;
+    margin: 10px auto;
+    border: none;
+}
+
+#modal {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: rgba(0,0,0,0.75);
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+}
+
+#modal-inner{
+    padding: 20px;
+    width: 60%;
+    border-radius: 5px;
+    background: #aaa;
+    margin: 5% auto;
+    text-align: left;
+}
+
+#modal2 {
+    position: fixed;
+    display: none;
+    top: 0px;
+    left: 0px;
+    background: rgba(0,0,0,0.75);
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+}
+
+#modal-inner2{
+    padding: 20px;
+    width: 50%;
+    border-radius: 5px;
+    background: #aaa;
+    margin: 30% auto;
+    text-align: center;
+
+}
+
+#footer {
+    width: 99%;
+    position: absolute;
+    bottom: 0;
+    margin-top: 5px;
+    text-align: center;
+}
+
+#show {
+    display: block;
+    margin: auto;
+    color: #ff89db;
+}
+
+
