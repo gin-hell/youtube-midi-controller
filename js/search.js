@@ -2,13 +2,30 @@
 
 // Called automatically when JavaScript client library is loaded.
 function onClientLoad() {
-    gapi.client.load('youtube', 'v3', onYouTubeApiLoad);
+    gapi.client.load('youtube', 'v3'/*, onYouTubeApiLoad */);
+    gapi.client.setApiKey('AIzaSyCR5In4DZaTP6IEZQ0r1JceuvluJRzQNLE');  
     console.log("client library loaded")
 }
 
-// Called automatically when YouTube API interface is loaded (see line 9).
-function onYouTubeApiLoad() {
-    gapi.client.setApiKey('AIzaSyCR5In4DZaTP6IEZQ0r1JceuvluJRzQNLE');   
+function onYouTubeIframeAPIReady() {
+    // console.log("youtube player ready")
+
+    player = new YT.Player("player",{ 
+        height: '360',
+        width: '640',
+        videoId: selectionId,
+        events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+        }, playerVars: { 
+            'controls': 0, 
+            'showinfo': 0,
+            'rel' : 0,
+            'fs' : 0,
+        }
+    });
+
+
 }
 
 
@@ -23,10 +40,11 @@ var button = document.getElementById("button");
 
 function search() {
     // Use the JavaScript client library to create a search.list() API call.
+
     request = gapi.client.youtube.search.list({
         part: 'snippet',
         type: "video",
-        q: document.getElementById("query").value
+        q: document.getElementById("search").value
     });
     
     // Send the request to the API server,
@@ -37,7 +55,7 @@ function search() {
 // Called automatically with the response of the YouTube API request.
 
 var results;
-var selector = document.getElementById("selector");
+var selector;
 
 function onSearchResponse(response) {
     results = response.result.items;
@@ -81,21 +99,7 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 var player;
 var selectionId;
 
-function onYouTubeIframeAPIReady() {
-    // console.log("youtube player ready")
 
-    player = new YT.Player("player",{ 
-        height: '390',
-        width: '640',
-        videoId: selectionId,
-        events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-        }
-    });
-
-
-}
 
 // 4. The API will call this function when the video player is ready.
 function onPlayerReady(event) { 

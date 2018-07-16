@@ -1,36 +1,30 @@
 <!DOCTYPE html>
 <html>
     <head>
-    	<title> - NASDAQURI - </title>
+    	<title>yOUtUBE</title>
         <meta charset="UTF-8">
-        <meta description="#BIGTEEN">
+        <meta description="YOU TUBE">
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="icon" href="imgs/youtube-small.png">
 
     </head>
 
     <body>  
 
         <script src="js/search.js" type="text/javascript"></script>
+        <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
         <script src="https://apis.google.com/js/client.js?onload=onClientLoad" type="text/javascript"></script>
         <script src="js/midi.js" type="text/javascript"></script>
 
-        <div class="div-stuff">
-            <img id="header" src="imgs/BIGTEEN.gif">
-        </div>
 
         <div class="div-stuff">
-        	<input id="query" type="text" placeholder="search for a #BIGTEEN !!!" autocomplete="off"/>
-            <button id="button" onclick="search()">~*🔍*~</button>
+            <img id="show" src="imgs/youtube-full.png">
+        	<input id="search" autocapitalize="none" autocomplete="off" autocorrect="off" autofocus="" name="search_query" tabindex="0" type="text" spellcheck="false" placeholder="Search" style="outline: none;">
+            <button id="button" onclick="search()"><img src="imgs/search.png"></button>
         </div>
 
         <div id="container">
-<!--             <div class="time">
-                <p id="L">time</p>
-            </div> -->
-            <div id="player"></div>  
-<!--             <div class="time">
-                <p id="R">time</p>
-            </div>   --> 
+            <div id="player"></div>    
         </div>
 
         <div id = "icons">
@@ -48,19 +42,20 @@
         </div>
 
         <div class="div-stuff">
-            <select id="selector" onchange="selection()"></select>
-            <!-- <select id="inputselector" onchange="inputselection()"></select> -->
+            <select id="selector" onchange="selection()">
+                <option value="0"> Search for a video above </option>
+            </select>
         </div>
 
         <div id="modal">    
             <div id="modal-inner"> 
                 
-                <h1> #BIGTEEN (not the porn thing) </h1>
+                <h1> www.yOUtUbE.com </h1>
 
-                <p style="color:#555555; font-style:italic;">bigTEEN.zone is a web application that lets users control YouTube video playback parameters via MIDI protocol</p>
+                <p style="color:#555555; font-style:italic;">yOUtUBE is a web application that lets users control YouTube video playback parameters via MIDI protocol</p>
 
                 <ul>
-                    <li> connect USB MIDI device, then reload bigTEEN.zone </li>
+                    <li> connect USB MIDI device, then reload the page </li>
 
                     <li> click on a playback parameter icon below && then move a knob/button on yr MIDI controller to assign it to a plackback function ~~ reassign the parameter  by clicking && moving a new knob/button </li>
 
@@ -106,13 +101,9 @@
             </div>
         </div>
  
-<!--         <div id="footer"> -->
-            <button id="show">show me that info again plz !!!</button>
-<!--         </div> -->
         
 
 
-<!-- f -->
 
 
 

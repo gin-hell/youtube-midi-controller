@@ -1,8 +1,9 @@
 
 
 html {
-    background-color: #555555;
-    font-family: sans-serif;
+    background-color: #fafafa;
+    font-size: 10px;
+    font-family: Roboto, Arial, sans-serif;
     height: 100%;
 }
 
@@ -11,12 +12,12 @@ body {
 }
 
 p, h1 {
-    color: #ff89db;
+    color: #ff0002;
 }
 
 li, #modal-inner2 > li {
-    list-style-type: circle;
-    color: #555555;
+    /*list-style-type: circle;*/
+    color: #ffffff;
     margin:10px auto;
 }
 
@@ -39,8 +40,6 @@ img {
 
 #player {
     margin: 10px auto;
-    border: #ff89db 5px solid;
-    border-radius: 5px;
 }
 
 #container {
@@ -74,18 +73,23 @@ img {
     text-align: center;
 }
 
-#query {
+#logo {
+    padding: auto 10px 0px 0px;
+}
+
+#search {
     /*margin: 10px auto;*/
-    color: #ff89db;
-    width: 500px;
+    /*color: #ff0000;*/
+    width: 400px;
     height: 40px;
-    border-radius: 10px;
-    font-size: 24pt;
+    font-size: 16pt;
+    font-weight: 400;
     padding-left: 5px;
 }
 
 button {
     cursor: pointer;
+
 }
 
 #loop-size {
@@ -96,19 +100,24 @@ button {
 }
 
 #button {
-    height: 47px;
-    width: 120px;
-    border-radius: 10px;
-    font-size: 24pt;
+    cursor: pointer;
+    height: 45px;
+    width: 65px;
+    border: 1px solid #d3d3d3;
+    background-color: #f8f8f8;
+    border-radius: 0 2px 2px 0;
+    /*margin: 0;*/
 }
 
 #button, #close, #close2 {
-    color: #ff89db;
+    color: #ff0002;
 }
 
 #selector, #inputselector {
+
     font-size: 12pt;
-    background-color: #ff89db;
+    background-color: #ff0002;
+    color: #fafafa;
     display: block;
     margin: 10px auto;
     border: none;
@@ -149,7 +158,7 @@ button {
     width: 50%;
     border-radius: 5px;
     background: #aaa;
-    margin: 30% auto;
+    margin: 10px auto;
     text-align: center;
 
 }
@@ -162,10 +171,5 @@ button {
     text-align: center;
 }
 
-#show {
-    display: block;
-    margin: auto;
-    color: #ff89db;
-}
 
 
