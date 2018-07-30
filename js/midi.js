@@ -7,7 +7,7 @@ if (navigator.requestMIDIAccess) {
 	    }).then(onMIDISuccess, onMIDIFailure);
 
 } else {
-    alert("No MIDI support in your browser, please use Chrome");
+    alert("No MIDI support in this browser, please use Chrome");
 }
 
 function onMIDISuccess(MIDIAccess) {
@@ -44,7 +44,7 @@ function onMIDISuccess(MIDIAccess) {
 
 function onMIDIFailure(error) {
     // when we get a failed response, run this code
-    console.log("No access to MIDI devices or your browser doesn't support WebMIDI API. Please use WebMIDIAPIShim " + error);
+    console.log("error: " + error);
 }
 
 var data;
@@ -108,7 +108,7 @@ function onMIDIMessage(event) {
 
     data = event.data;
 
-    console.log(data);
+    // console.log(data);
 	
 	channel = data[0];
     note = data[1];
@@ -122,6 +122,7 @@ function onMIDIMessage(event) {
     	sessionStorage.setItem( "playNote", note );
     	playListening = false;
     	modal2.style.display = "none";
+        document.getElementById('play').style.backgroundColor = "transparent";
     }
 
     if (note == sessionStorage.getItem("playNote")) {
@@ -140,6 +141,7 @@ function onMIDIMessage(event) {
     	sessionStorage.setItem( "pauseNote", note );
 		pauseListening = false;
     	modal2.style.display = "none";
+        document.getElementById('pause').style.backgroundColor = "transparent";
     }
 
     if (note == sessionStorage.getItem("pauseNote")) {
@@ -158,6 +160,7 @@ function onMIDIMessage(event) {
         sessionStorage.setItem( "prevNote", note );
 		prevListening = false;
     	modal2.style.display = "none";
+        document.getElementById('prev').style.backgroundColor = "transparent";
     }
 
     if (note == sessionStorage.getItem("prevNote")) {
@@ -176,6 +179,7 @@ function onMIDIMessage(event) {
         sessionStorage.setItem( "nextNote", note );
     	nextListening = false;
     	modal2.style.display = "none";
+        document.getElementById('next').style.backgroundColor = "transparent";
     }
 
     if (note == sessionStorage.getItem("nextNote")) {
@@ -194,6 +198,7 @@ function onMIDIMessage(event) {
         sessionStorage.setItem( "rewindNote", note );
     	rewindListening = false;
     	modal2.style.display = "none";
+        document.getElementById('rewind').style.backgroundColor = "transparent";
     }
 
     if (note == sessionStorage.getItem("rewindNote")) {
@@ -212,6 +217,7 @@ function onMIDIMessage(event) {
         sessionStorage.setItem( "fastforwardNote", note );
         fastforwardListening = false;
         modal2.style.display = "none";
+        document.getElementById('fastforward').style.backgroundColor = "transparent";
     }
 
     if (note == sessionStorage.getItem("fastforwardNote")) {
@@ -230,6 +236,7 @@ function onMIDIMessage(event) {
         sessionStorage.setItem( "loopNote", note );
     	loopListening = false;
     	modal2.style.display = "none";
+        document.getElementById('loop').style.backgroundColor = "transparent";
     }
 
     if (note == sessionStorage.getItem("loopNote")) {
@@ -248,6 +255,7 @@ function onMIDIMessage(event) {
         sessionStorage.setItem( "playbackNote", note );
     	playbackListening = false;
     	modal2.style.display = "none";
+        document.getElementById('playback').style.backgroundColor = "transparent";
     }
 
     if (note == sessionStorage.getItem("playbackNote")) {
@@ -265,6 +273,8 @@ function onMIDIMessage(event) {
         sessionStorage.setItem( "sizeNote", note );
     	sizeListening = false;
     	modal2.style.display = "none";
+        
+        document.getElementById('width').style.backgroundColor = "transparent";
     }
 
     if (note == sessionStorage.getItem("sizeNote")) {
@@ -281,6 +291,8 @@ function onMIDIMessage(event) {
         sessionStorage.setItem( "volNote", note );
         volListening = false;
         modal2.style.display = "none";
+        document.getElementById('vol').style.backgroundColor = "transparent";
+
     }
 
     if (note == sessionStorage.getItem("volNote")) {
@@ -301,11 +313,13 @@ function onMIDIMessage(event) {
 // buttons:
 
 var modal2 = document.getElementById("modal2");
-var close2 = document.getElementById("close2");		
+var close2 = document.getElementById("close2");	
 
 
-function playMIDI() {
+function playMIDI(target) {
 
+    var img = document.getElementById('play');
+    img.style.backgroundColor = "#ff0002";
 	playListening = true;
 
 	modal2 = document.getElementById("modal2");
@@ -313,12 +327,16 @@ function playMIDI() {
 
 	modal2.style.display = "block";
 	close2.onclick = function() {
-		modal2.style.display = "none"
+		modal2.style.display = "none";
+        img.style.backgroundColor = "transparent";
 	}
 }
 
 
 function pauseMIDI() {
+
+    var img = document.getElementById('pause');
+    img.style.backgroundColor = "#ff0002";
 
 	pauseListening = true;
 
@@ -327,25 +345,33 @@ function pauseMIDI() {
 
 	modal2.style.display = "block";
 	close2.onclick = function() {
-		modal2.style.display = "none"
+		modal2.style.display = "none";
+        img.style.backgroundColor = "transparent";
 	}
 }
 
 
 function prevMIDI() {
 
+    var img = document.getElementById('prev');
+    img.style.backgroundColor = "#ff0002";
+    
 	prevListening = true;
 
 	modal2 = document.getElementById("modal2");
 	close2 = document.getElementById("close2");
 	modal2.style.display = "block";
 	close2.onclick = function() {
-		modal2.style.display = "none"
+		modal2.style.display = "none";
+        img.style.backgroundColor = "transparent";
 	}
 
 }
 
 function fastforwardMIDI() {
+
+    var img = document.getElementById('fastforward');
+    img.style.backgroundColor = "#ff0002";
 
     fastforwardListening = true;
 
@@ -353,7 +379,8 @@ function fastforwardMIDI() {
     close2 = document.getElementById("close2");
     modal2.style.display = "block";
     close2.onclick = function() {
-        modal2.style.display = "none"
+        modal2.style.display = "none";
+        img.style.backgroundColor = "transparent";
     }
 
 }
@@ -361,18 +388,25 @@ function fastforwardMIDI() {
 
 function nextMIDI() {
 
+    var img = document.getElementById('next');
+    img.style.backgroundColor = "#ff0002";
+
 	nextListening = true;
 
 	modal2 = document.getElementById("modal2");
 	close2 = document.getElementById("close2");
 	modal2.style.display = "block";
 	close2.onclick = function() {
-		modal2.style.display = "none"
+		modal2.style.display = "none";
+        img.style.backgroundColor = "transparent";
 	}
 }
 
 
 function rewindMIDI() {
+
+    var img = document.getElementById('rewind');
+    img.style.backgroundColor = "#ff0002";
 
 	rewindListening = true;
 
@@ -380,12 +414,16 @@ function rewindMIDI() {
 	close2 = document.getElementById("close2");
 	modal2.style.display = "block";
 	close2.onclick = function() {
-		modal2.style.display = "none"
+		modal2.style.display = "none";
+        img.style.backgroundColor = "transparent";
 	}	
 }
 
 
 function loopMIDI() {
+
+    var img = document.getElementById('loop');
+    img.style.backgroundColor = "#ff0002";
 
 	loopListening = true;
 
@@ -393,13 +431,17 @@ function loopMIDI() {
 	close2 = document.getElementById("close2");
 	modal2.style.display = "block";
 	close2.onclick = function() {
-		modal2.style.display = "none"
+		modal2.style.display = "none";
+        img.style.backgroundColor = "transparent";
 	}	
 }
 
 
 // knobs/faders:
 function playbackMIDI() {
+    
+    var img = document.getElementById('playback');
+    img.style.backgroundColor = "#ff0002";
 
 	playbackListening = true;
 
@@ -407,12 +449,16 @@ function playbackMIDI() {
 	close2 = document.getElementById("close2");
 	modal2.style.display = "block";
 	close2.onclick = function() {
-		modal2.style.display = "none"
+		modal2.style.display = "none";
+        img.style.backgroundColor = "transparent";
 	}	
 }
 
 
 function loopSizeMIDI() {
+
+    var img = document.getElementById('width');
+    img.style.backgroundColor = "#ff0002";
 
 	sizeListening = true;
 
@@ -420,11 +466,15 @@ function loopSizeMIDI() {
 	close2 = document.getElementById("close2");
 	modal2.style.display = "block";
 	close2.onclick = function() {
-		modal2.style.display = "none"
+		modal2.style.display = "none";
+        img.style.backgroundColor = "transparent";
 	}	
 }
 
 function volMIDI() {
+
+    var img = document.getElementById('vol');
+    img.style.backgroundColor = "#ff0002";
 
     volListening = true;
 
@@ -432,7 +482,8 @@ function volMIDI() {
     close2 = document.getElementById("close2");
     modal2.style.display = "block";
     close2.onclick = function() {
-        modal2.style.display = "none"
+        modal2.style.display = "none";
+        img.style.backgroundColor = "transparent";
     }   
 }
 

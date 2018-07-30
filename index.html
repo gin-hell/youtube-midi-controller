@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    	<title>yOUtUBE</title>
+    	<title>YouTube</title>
         <meta charset="UTF-8">
         <meta description="YOU TUBE">
         <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -28,12 +28,12 @@
         </div>
 
         <div id = "icons">
-            <img id="prev" src="imgs/skip-back.png" onclick="prevMIDI()" title="Go Back 1 Video in Results">
-            <img id="rewind" src="imgs/rewind.png" onclick="rewindMIDI()" title="Skip Back 1 Second">
+            <img id="prev" src="imgs/skip-back.png" onclick="prevMIDI()" title="Previous Video">
+            <img id="rewind" src="imgs/rewind.png" onclick="rewindMIDI()" title="Skip Back One Second">
             <img id="pause" src="imgs/pause.png" onclick="pauseMIDI()" title="Pause">
             <img id="play" src="imgs/play.png" onclick="playMIDI()" title="Play, duh">
-            <img id="fastforward" src="imgs/fast-forward.png" onclick="fastforwardMIDI()" title="Skip Forward 1 Second">
-            <img id="next" src="imgs/skip-forward.png" onclick="nextMIDI()" title="Go to Next VIdeo in Results">
+            <img id="fastforward" src="imgs/fast-forward.png" onclick="fastforwardMIDI()" title="Skip Forward One Second">
+            <img id="next" src="imgs/skip-forward.png" onclick="nextMIDI()" title="Next VIdeo">
             <img id="loop" src="imgs/loop.png" onclick="loopMIDI()" title="Trigger Loop">
             <img id="width" src="imgs/width.png" onclick="loopSizeMIDI()" title="Loop Size">
             <img id="playback" src="imgs/speed.png" onclick="playbackMIDI()" title="Playback Rate">
@@ -50,41 +50,45 @@
         <div id="modal">    
             <div id="modal-inner"> 
                 
-                <h1> www.yOUtUbE.com </h1>
+                <h1> www.yyyyytube.com </h1>
 
-                <p style="color:#555555; font-style:italic;">yOUtUBE is a web application that lets users control YouTube video playback parameters via MIDI protocol</p>
+                <p style="font-family: Roboto, Arial, sans-serif;
+                
+                    "
+                    >www.yyyyyoutube.com is a web application that allowers users control YouTube video playback parameters using a USB MIDI controller</p>
 
+                <p>How to get started:</p>
                 <ul>
-                    <li> connect USB MIDI device, then reload the page </li>
+                    <li> Connect USB MIDI device, then reload the page </li>
 
-                    <li> click on a playback parameter icon below && then move a knob/button on yr MIDI controller to assign it to a plackback function ~~ reassign the parameter  by clicking && moving a new knob/button </li>
+                    <li> Click on a playback parameter icon below && then move a knob/button on yr MIDI controller to assign it to a plackback function ~~ reassign the parameter  by clicking && moving a new knob/button </li>
 
-                    <li>functions are, in order of the icons below:
+                    <li>Video control functions, in order of the icons below the viewer, are:
                         <ul id="sublist">
-                            <li>go back 1 video in results</li>
-                            <li>skip back 1 second</li>
-                            <li>pause</li>
-                            <li>play</li>
-                            <li>skip forward 1 second</li>
-                            <li>go forward 1 video in results</li>
-                            <li>trigger loop</li>
-                            <li>loop size</li>
-                            <li>playback rate</li>
-                            <li>volume</li>
+                            <li>Go back one video in results</li>
+                            <li>Skip back one second</li>
+                            <li>Pause</li>
+                            <li>Play</li>
+                            <li>Skip forward one second</li>
+                            <li>Go forward one video in results</li>
+                            <li>Trigger loop</li>
+                            <li>Loop size</li>
+                            <li>Playback rate</li>
+                            <li>Volume</li>
                         </ul>
                     </li>
 
-                    <li> playback rate, loop size, && volume are control values 0-127 (knobs); all other parameters are on/off (buttons) </li>
+                    <li> The playback rate, loop size, && volume are control values (knobs); all other parameters are on/off (buttons) </li>
 
-                    <li> don't forget to set yr loop size before you trigger a loop so that you don't try to make a loop without a size ! </li>
+                    <li> Don't forget to set a loop size before triggering a loop, otherwise you'll be asking the app to make a loop with a null size! </li>
 
-                    <li> tip: the longer the video is, the more it has to buffer && smaller loops will take longer to load or may not load at all</li>
+                    <li> TIP: the longer the video is the more data it has to buffer, meaning smaller loops will take longer to load or may not load at all</li>
 
-                    <li> use the #BIGTEEN search bar to search for a YouTube video </li>
+                    <li> The drop-down menu below the video player will display the top five results (based on YouTube's rating algorithms) matching your search terms; select a title to begin playback </li>
 
-                    <li> the drop-down menu below the video player will display the top 5 results matching yr search terms; select a title to begin playback </li>
-
+                    <li> If you want to see this information after closing this window, click on the YouTube logo at the top of the page</li>
                 </ul>
+                <p>For more info or to check out the code, visit the <a href="https://github.com/gin-hell/youtube-midi-controller" target="blank" style="color:#ff0002">GitHub repo</a></p>
 
                 <button id="close">close</button>
             </div>
@@ -94,7 +98,7 @@
             <div id="modal-inner2"> 
 
                 <p>
-                    move a MIDI control to assign it to the function u just clicked on ! 
+                    Move a control on your MIDI device to assign this command
                 </p>
 
                 <button id="close2">close</button>
@@ -130,6 +134,16 @@
             show.onclick = function(){
                 modal.style.display = "block";
             }
+
+            // or press esc key to close modal:
+
+            document.addEventListener("keyup", function(event){
+
+                if(event.keyCode == 27){
+                    sessionStorage.setItem("display", "none");
+                    modal.style.display = sessionStorage.getItem("display")
+                }
+            });
 
          </script>
 
