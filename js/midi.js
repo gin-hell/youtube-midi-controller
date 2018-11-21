@@ -102,6 +102,11 @@ var volNote;
 var volVel;
 var volListening = false;
 
+var newWindowChan;
+var newWindowNote;
+var newWindowVel;
+var newWindowListening = false;
+
 
 
 function onMIDIMessage(event) {
@@ -113,6 +118,24 @@ function onMIDIMessage(event) {
 	channel = data[0];
     note = data[1];
     vel = data[2];
+
+//open new window !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    if (newWindowListening == true){
+        newWindowChan = channel;
+        newWindowNote = note;
+        sessionStorage.setItem( "newWindowNote", note );
+        newWindowListening = false;
+        modal2.style.display = "none";
+        document.getElementById('new').style.backgroundColor = "transparent";
+    }
+
+    if (note == sessionStorage.getItem("newWindowNote")) {
+        newWindowVel = vel/127;
+    }
+
+    if (newWindowVel>0){
+        openNewWindow()
+    }
 
 
 //play
@@ -279,7 +302,7 @@ function onMIDIMessage(event) {
 
     if (note == sessionStorage.getItem("sizeNote")) {
 		
-		loopSize = (vel/127) + 0.05;
+		loopSize = (vel/127) + 0.01;
 
     }
 
@@ -299,7 +322,7 @@ function onMIDIMessage(event) {
         
         vol();
         volume = Math.round((vel/127) * 100);
-        console.log(volume);
+        // console.log(volume);
 
     }
 
@@ -314,6 +337,24 @@ function onMIDIMessage(event) {
 
 var modal2 = document.getElementById("modal2");
 var close2 = document.getElementById("close2");	
+
+
+// open new window !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+function openNewWindowMIDI(){
+
+    var img = document.getElementById('new');
+    img.style.backgroundColor = "#ff0002";
+    newWindowListening = true;
+
+    modal2 = document.getElementById("modal2");
+    close2 = document.getElementById("close2");     
+
+    modal2.style.display = "block";
+    close2.onclick = function() {
+        modal2.style.display = "none";
+        img.style.backgroundColor = "transparent";
+    }
+}
 
 
 function playMIDI(target) {
@@ -435,6 +476,10 @@ function loopMIDI() {
         img.style.backgroundColor = "transparent";
 	}	
 }
+
+
+
+
 
 
 // knobs/faders:

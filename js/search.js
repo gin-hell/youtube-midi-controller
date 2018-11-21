@@ -60,6 +60,7 @@ var selector;
 function onSearchResponse(response) {
     results = response.result.items;
     selector = document.getElementById("selector");
+    player.loadVideoById(results[0].id.videoId);
 
     while (selector.options.length > 0) {                
         selector.remove(0);
@@ -74,7 +75,9 @@ function onSearchResponse(response) {
     	document.getElementById("selector").add(opt);
     }
 
+    
 }
+
 
 function selection(){
     selector = document.getElementById("selector");
@@ -121,6 +124,9 @@ function onPlayerStateChange(event) {
 
 var duration;
 
+function openNewWindow() {
+    window.open("newWindowIndex.html", "", "innerWidth=640, innerHeight=380, scrollbars=no, status=no, left="+ Math.random()*(window.innerWidth)+", top="+ Math.random()*(window.innerHeight)+"");
+}
 
 function getCurrentTime() {
     currentTime = player.getCurrentTime();
@@ -198,5 +204,7 @@ var volume;
 function vol() {
     player.setVolume( volume )
 }
+
+
 
 

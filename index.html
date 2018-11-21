@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html id="cloneThis">
     <head>
     	<title>YouTube</title>
         <meta charset="UTF-8">
@@ -15,6 +15,7 @@
         <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
         <script src="https://apis.google.com/js/client.js?onload=onClientLoad" type="text/javascript"></script>
         <script src="js/midi.js" type="text/javascript"></script>
+        <!-- <script src="js/newWindow.js" type="text/javascript"></script> -->
 
 
         <div class="div-stuff">
@@ -28,6 +29,7 @@
         </div>
 
         <div id = "icons">
+            <img id="new" src="imgs/new-window.png" onclick="openNewWindowMIDI()" title="New Player Window">
             <img id="prev" src="imgs/skip-back.png" onclick="prevMIDI()" title="Previous Video">
             <img id="rewind" src="imgs/rewind.png" onclick="rewindMIDI()" title="Skip Back One Second">
             <img id="pause" src="imgs/pause.png" onclick="pauseMIDI()" title="Pause">
@@ -143,8 +145,11 @@
                     sessionStorage.setItem("display", "none");
                     modal.style.display = sessionStorage.getItem("display")
                 }
-            });
 
+                // if(event.keyCode == 192){
+                //     var myWindow = window.open("newWindowIndex.html", "", "innerWidth=640, innerHeight=375, scrollbars=no, status=no left="+ Math.random()*(window.innerWidth)+", top="+ Math.random()*(window.innerHeight)+"");
+                // }
+            });
          </script>
 
 
