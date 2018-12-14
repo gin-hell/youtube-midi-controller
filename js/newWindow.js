@@ -29,33 +29,33 @@ function onYouTubeIframeAPIReady() {
 }
 
 
-function search() {
-    // Use the JavaScript client library to create a search.list() API call.
+// function search() {
+//     // Use the JavaScript client library to create a search.list() API call.
 
-    request = gapi.client.youtube.videos.list({
-        part: 'snippet',
-        type: "video",
-        chart: "mostPopular",
-        maxResults: "50"
-    });
+//     request = gapi.client.youtube.videos.list({
+//         part: 'snippet',
+//         type: "video",
+//         chart: "mostPopular",
+//         maxResults: "50"
+//     });
     
-    // Send the request to the API server,
-    // and invoke onSearchRepsonse() with the response.
-    request.execute(getTrending);
-}
+//     // Send the request to the API server,
+//     // and invoke onSearchRepsonse() with the response.
+//     request.execute(getTrending);
+// }
 
 // Called automatically with the response of the YouTube API request.
 
 var results;
 
-function getTrending(response){
+// function getTrending(response){
 
-    var randomId = Math.floor(Math.random()*25);
-	console.log(response.result.items[randomId].id);
+//     var randomId = Math.floor(Math.random()*25);
+// 	console.log(response.result.items[randomId].id);
     
-    player.loadVideoById(response.result.items[randomId].id);
+//     player.loadVideoById(response.result.items[randomId].id);
 
-}
+// }
 
 //~~~~~~~//~~~~~~~//~~~~~~~//~~~~~~~ youtube player api ~~~~~~~//~~~~~~~//~~~~~~~//~~~~~~~//
 
@@ -74,7 +74,7 @@ var selectionId;
 function onPlayerReady(event) { 
     player.controls=0;
     player.modestbranding=1;
-    search();
+    // search();
 }
 
 // 5. The API calls this function when the player's state changes.

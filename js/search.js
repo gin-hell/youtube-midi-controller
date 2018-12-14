@@ -3,7 +3,7 @@
 // Called automatically when JavaScript client library is loaded.
 function onClientLoad() {
     gapi.client.load('youtube', 'v3'/*, onYouTubeApiLoad */);
-    gapi.client.setApiKey('AIzaSyCR5In4DZaTP6IEZQ0r1JceuvluJRzQNLE');  
+    gapi.client.setApiKey('AIzaSyB2Rp1pubTJu4oc1h6OPkdtwJ22obhAoew'); 
     console.log("client library loaded")
 }
 
@@ -68,12 +68,13 @@ function onSearchResponse(response) {
     }
 
     for (var i = 0; i < results.length; i++) {
-    	console.log(results[i]);
+    	// console.log(results[i]);
     	var opt = document.createElement("option");
     	opt.text = results[i].snippet.title;
     	opt.value = i;
     	document.getElementById("selector").add(opt);
     }
+
 
     
 }
@@ -81,7 +82,7 @@ function onSearchResponse(response) {
 
 function selection(){
     selector = document.getElementById("selector");
-    console.log(results[selector.value].id.videoId);
+    // console.log(results[selector.value].id.videoId);
     selectionId = results[selector.value].id.videoId;
 
     player.loadVideoById(selectionId);
@@ -97,10 +98,10 @@ tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-// 3. This function creates an <iframe> (and YouTube player)
-//    after the API code downloads.
+
 var player;
 var selectionId;
+var currentId;
 
 
 
@@ -125,8 +126,11 @@ function onPlayerStateChange(event) {
 var duration;
 
 function openNewWindow() {
-    window.open("newWindowIndex.html", "", "innerWidth=640, innerHeight=380, scrollbars=no, status=no, left="+ Math.random()*(window.innerWidth)+", top="+ Math.random()*(window.innerHeight)+"");
+
+// open new window with new YT player
+
 }
+
 
 function getCurrentTime() {
     currentTime = player.getCurrentTime();
@@ -195,7 +199,6 @@ function loop() {
     loopSize;
     clearInterval(myLoop);
     var time = player.getCurrentTime();
-    console.log(time);
     myLoop = setInterval( function() { player.seekTo(time) }, (loopSize * 1000));
 }
 
@@ -204,6 +207,9 @@ var volume;
 function vol() {
     player.setVolume( volume )
 }
+
+
+
 
 
 

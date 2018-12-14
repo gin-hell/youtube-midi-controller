@@ -21,26 +21,11 @@ function onMIDISuccess(MIDIAccess) {
 	for ( var input = inputs.next(); input && !input.done; input = inputs.next() ) {
 		input.value.onmidimessage = onMIDIMessage;
 	}
-
-	// var i = 0;
-	// for (var input of midi.inputs.values()) {
-	// 	var opt = document.createElement("option");
-	// 	opt.text = input.name;
-	// 	opt.value = i;
-	// 	midiDevices.push( input );
-	// 	document.getElementById("inputselector").add(opt);
-	// 	i++;
-	//  }	
-
-	// document.getElementById("inputselector").addEventListener("change",function(){
-	// 	for (var i = 0; i < midiDevices.length; i++) {
-	// 		midiDevices[i].onmidimessage = null;
-	// 	};
-	// 	midiDevices[this.value].onmidimessage = onMIDIMessage;
-
-	// });
-
 }
+
+
+
+
 
 function onMIDIFailure(error) {
     // when we get a failed response, run this code
@@ -107,13 +92,21 @@ var newWindowNote;
 var newWindowVel;
 var newWindowListening = false;
 
+var sessionStorageControls = sessionStorage;
+var sessionStorageEmpty = sessionStorage.clear();
 
 
 function onMIDIMessage(event) {
-
+    // console.log(window.document.hasFocus());
     data = event.data;
+    if (window.document.hasFocus == true){
+        sessionStorage = sessionStorageControls;
+        // console.log(data);
+    } else if (window.document.hasFocus == false) {
+        sessionStorage.clear();
+        // console.log(data);
+    }
 
-    // console.log(data);
 	
 	channel = data[0];
     note = data[1];
@@ -134,7 +127,7 @@ function onMIDIMessage(event) {
     }
 
     if (newWindowVel>0){
-        openNewWindow()
+        // openNewWindow();
     }
 
 
