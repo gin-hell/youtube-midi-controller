@@ -1,18 +1,27 @@
+var selector;
+document.addEventListener("DOMContentLoaded", function(){
+    selector = document.querySelector("#selector");
+})
+
 
 
 // Called automatically when JavaScript client library is loaded.
 function onClientLoad() {
     gapi.client.load('youtube', 'v3'/*, onYouTubeApiLoad */);
-    gapi.client.setApiKey('AIzaSyB2Rp1pubTJu4oc1h6OPkdtwJ22obhAoew'); 
+    gapi.client.setApiKey('AIzaSyCOzMxkqFhURRMY3wFoq3TmpzwHZ23hj0E'); 
     console.log("client library loaded")
 }
+
+var player;
+var selectionId;
+var currentId;
 
 function onYouTubeIframeAPIReady() {
     // console.log("youtube player ready")
 
     player = new YT.Player("player",{ 
-        height: '360',
-        width: '640',
+        height: '480',
+        width: '854',
         videoId: selectionId,
         events: {
             'onReady': onPlayerReady,
@@ -29,14 +38,7 @@ function onYouTubeIframeAPIReady() {
 }
 
 
-document.addEventListener("keyup", function(event){
-
-    if(event.keyCode == 13){
-        search();
-    }
-});
-
-var button = document.getElementById("button");
+// var searchButton = document.getElementById("search-button");
 
 function search() {
     // Use the JavaScript client library to create a search.list() API call.
@@ -52,14 +54,20 @@ function search() {
     request.execute(onSearchResponse);
 }
 
+document.addEventListener("keyup", function(event){
+
+    if(event.keyCode == 13){
+        search();
+    }
+});
 // Called automatically with the response of the YouTube API request.
 
-var results;
-var selector;
+var results = [];
+
 
 function onSearchResponse(response) {
     results = response.result.items;
-    selector = document.getElementById("selector");
+    selector = document.querySelector("#selector");
     player.loadVideoById(results[0].id.videoId);
 
     while (selector.options.length > 0) {                
@@ -68,11 +76,11 @@ function onSearchResponse(response) {
     }
 
     for (var i = 0; i < results.length; i++) {
-    	// console.log(results[i]);
-    	var opt = document.createElement("option");
-    	opt.text = results[i].snippet.title;
-    	opt.value = i;
-    	document.getElementById("selector").add(opt);
+        // console.log(results[i]);
+        var opt = document.createElement("option");
+        opt.text = results[i].snippet.title;
+        opt.value = i;
+        document.querySelector("#selector").add(opt);
     }
 
 
@@ -81,7 +89,7 @@ function onSearchResponse(response) {
 
 
 function selection(){
-    selector = document.getElementById("selector");
+    selector = document.querySelector("#selector");
     // console.log(results[selector.value].id.videoId);
     selectionId = results[selector.value].id.videoId;
 
@@ -99,9 +107,7 @@ var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 
-var player;
-var selectionId;
-var currentId;
+
 
 
 
@@ -109,6 +115,7 @@ var currentId;
 function onPlayerReady(event) { 
     player.controls=0;
     player.modestbranding=1;
+    console.log("player ready");
 }
 
 // 5. The API calls this function when the player's state changes.
@@ -140,18 +147,16 @@ function getCurrentTime() {
 
 function play() {
     clearInterval(myLoop);
-    // player.setPlaybackRate(1);
+    looping = false;
     player.playVideo()
 }
 
 
 
 function pause() {
-    clearInterval(myLoop);
     player.pauseVideo()
+    looping = false;
 }
-
-
 
 var i = 1; 
 
@@ -174,8 +179,9 @@ function fastforward() {
     player.seekTo(time + 1);
 }
 
-
 var newIdIndex = selector.value;
+
+
 
 function nextVideo(){
     newIdIndex = (newIdIndex + 1) % 5;
@@ -193,10 +199,12 @@ function prevVideo() {
 
 
 var myLoop;
+var looping;
 var loopSize;
 
 function loop() {
     loopSize;
+    looping = true;
     clearInterval(myLoop);
     var time = player.getCurrentTime();
     myLoop = setInterval( function() { player.seekTo(time) }, (loopSize * 1000));

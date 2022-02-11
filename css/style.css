@@ -62,23 +62,24 @@ img {
     text-align: center;
 }
 
-#logo {
-    padding: auto 10px 0px 0px;
-}
 
 #search {
-    /*margin: 10px auto;*/
-    /*color: #ff0000;*/
-    width: 400px;
+    margin: 15px auto;
+    width: 500px;
     height: 40px;
     font-size: 16pt;
     font-weight: 400;
     padding-left: 5px;
 }
 
-button {
-    cursor: pointer;
 
+
+#player-placeholder {
+    width: 854px;
+    height: 480px;
+    margin: 10px auto 20px auto;
+    display: block;
+    background-color: black;
 }
 
 #loop-size {
@@ -88,29 +89,67 @@ button {
     font-size: 16pt;
 }
 
-#button {
-    cursor: pointer;
-    height: 45px;
-    width: 65px;
-    border: 1px solid #d3d3d3;
-    background-color: #f8f8f8;
-    border-radius: 0 2px 2px 0;
-    text-shadow: 0 0 2px rgba(0,0,0,.5);
-}
 
-#button, #close, #close2 {
-    color: #ff0002;
-}
 
-#selector, #inputselector {
+
+
+
+
+
+#selector {
 
     font-size: 12pt;
     background-color: #ff0002;
     color: #fafafa;
     display: block;
-    margin: 10px auto;
+    margin: 10px auto 20px;
+    border: none;
+    min-width: 400px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#inputselector {
+    min-width: 275px;
+
+    background-color: #EFEFEF;
+    color: #ff0002;
+    border-radius: 5px;
+    padding: 5px;
+    margin: auto ;
     border: none;
 }
+
+/******************************** BUTTONS *********************************/
+
+
+button {
+    cursor: pointer;
+}
+
+#search-button {
+    color: #ff0002;
+    border-radius: 5px;
+    padding: 5px;
+
+    width: 65px;
+    height: 45px;
+    border: 1px solid #d3d3d3;
+    background-color: #EFEFEF;
+    border-radius: 0 2px 2px 0;
+    font-size: 26px;
+
+}
+
+#close, #close2, #show {
+    color: #ff0002;
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+}
+
+
+/******************************** MODALS *********************************/
 
 #modal {
     position: fixed;
@@ -156,13 +195,23 @@ button {
 
 }
 
+
+
+
+/******************************** FOOTER *********************************/
+
 #footer {
-    width: 99%;
-    position: absolute;
+    width: 300px;
+    position: relative;
     bottom: 0;
-    margin-top: 5px;
+    /*right: 50%;*/
+    margin: 500px auto;
+    display: block;
     text-align: center;
 }
-
+#logo {
+    height: 40px;
+    width: auto;
+}
 
 

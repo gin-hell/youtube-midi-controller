@@ -7,12 +7,12 @@ if (navigator.requestMIDIAccess) {
 	    }).then(onMIDISuccess, onMIDIFailure);
 
 } else {
-    alert("No MIDI support in this browser, please use Chrome");
+    alert("No MIDI support in this browser, please use Chrome; OR please allow MIDI access in browser");
 }
 
 function onMIDISuccess(MIDIAccess) {
     // when we get a succesful response, run this code
-	console.log(MIDIAccess);
+	console.log("Successful MIDIAccess response");
 
 	midi = MIDIAccess;
 
@@ -20,17 +20,19 @@ function onMIDISuccess(MIDIAccess) {
 
 	for ( var input = inputs.next(); input && !input.done; input = inputs.next() ) {
 		input.value.onmidimessage = onMIDIMessage;
+        console.log(input.value.onmidimessage);
 	}
 }
-
-
-
-
 
 function onMIDIFailure(error) {
     // when we get a failed response, run this code
     console.log("error: " + error);
 }
+
+if (localStorage.length > 0) {
+    console.log("Previous settings succesfully loaded")
+}
+
 
 var data;
 var channel;
@@ -92,60 +94,34 @@ var newWindowNote;
 var newWindowVel;
 var newWindowListening = false;
 
-var sessionStorageControls = sessionStorage;
-var sessionStorageEmpty = sessionStorage.clear();
+// var localStorageControls = localStorage;
+// var localStorageEmpty = localStorage.clear();
 
 
 function onMIDIMessage(event) {
-    // console.log(window.document.hasFocus());
     data = event.data;
-    if (window.document.hasFocus == true){
-        sessionStorage = sessionStorageControls;
-        // console.log(data);
-    } else if (window.document.hasFocus == false) {
-        sessionStorage.clear();
-        // console.log(data);
-    }
 
 	
 	channel = data[0];
     note = data[1];
     vel = data[2];
 
-//open new window !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    if (newWindowListening == true){
-        newWindowChan = channel;
-        newWindowNote = note;
-        sessionStorage.setItem( "newWindowNote", note );
-        newWindowListening = false;
-        modal2.style.display = "none";
-        document.getElementById('new').style.backgroundColor = "transparent";
-    }
-
-    if (note == sessionStorage.getItem("newWindowNote")) {
-        newWindowVel = vel/127;
-    }
-
-    if (newWindowVel>0){
-        // openNewWindow();
-    }
-
 
 //play
     if (playListening == true){
     	playChan = channel;
     	playNote = note;
-    	sessionStorage.setItem( "playNote", note );
+    	localStorage.setItem( "playNote", note );
     	playListening = false;
     	modal2.style.display = "none";
         document.getElementById('play').style.backgroundColor = "transparent";
     }
 
-    if (note == sessionStorage.getItem("playNote")) {
-    	playVel = vel/127;
+    if (note == localStorage.getItem("playNote")) {
+    	playVel = vel;
     }
 
-    if (playVel>0){
+    if (playVel==127){
     	play()
     }
 
@@ -154,17 +130,17 @@ function onMIDIMessage(event) {
     if (pauseListening == true){
     	pauseChan = channel;
     	pauseNote = note;    	
-    	sessionStorage.setItem( "pauseNote", note );
+    	localStorage.setItem( "pauseNote", note );
 		pauseListening = false;
     	modal2.style.display = "none";
         document.getElementById('pause').style.backgroundColor = "transparent";
     }
 
-    if (note == sessionStorage.getItem("pauseNote")) {
-    	pauseVel = vel/127;
+    if (note == localStorage.getItem("pauseNote")) {
+    	pauseVel = vel;
     }
 
-    if (pauseVel>0){
+    if (pauseVel==127){
     	pause();
     }
 
@@ -173,17 +149,17 @@ function onMIDIMessage(event) {
     if (prevListening == true) {
     	prevChan = channel;
     	prevNote = note;
-        sessionStorage.setItem( "prevNote", note );
+        localStorage.setItem( "prevNote", note );
 		prevListening = false;
     	modal2.style.display = "none";
         document.getElementById('prev').style.backgroundColor = "transparent";
     }
 
-    if (note == sessionStorage.getItem("prevNote")) {
-    	prevVel = vel/127;
+    if (note == localStorage.getItem("prevNote")) {
+    	prevVel = vel;
     }
 
-    if (prevVel>0){
+    if (prevVel==127){
     	prevVideo();
     }
 
@@ -192,17 +168,17 @@ function onMIDIMessage(event) {
     if (nextListening == true) {
     	nextChan = channel;
     	nextNote = note;
-        sessionStorage.setItem( "nextNote", note );
+        localStorage.setItem( "nextNote", note );
     	nextListening = false;
     	modal2.style.display = "none";
         document.getElementById('next').style.backgroundColor = "transparent";
     }
 
-    if (note == sessionStorage.getItem("nextNote")) {
-    	nextVel = vel/127;
+    if (note == localStorage.getItem("nextNote")) {
+    	nextVel = vel;
     }
 
-    if (nextVel>0){
+    if (nextVel==127){
     	nextVideo();
     }
 
@@ -211,17 +187,17 @@ function onMIDIMessage(event) {
     if (rewindListening == true) {
     	rewindChan = channel;
     	rewindNote = note;
-        sessionStorage.setItem( "rewindNote", note );
+        localStorage.setItem( "rewindNote", note );
     	rewindListening = false;
     	modal2.style.display = "none";
         document.getElementById('rewind').style.backgroundColor = "transparent";
     }
 
-    if (note == sessionStorage.getItem("rewindNote")) {
-    	rewindVel = vel/127;
+    if (note == localStorage.getItem("rewindNote")) {
+    	rewindVel = vel;
     } 
 
-    if (rewindVel>0) {
+    if (rewindVel==127) {
     	rewind();
     }
 
@@ -230,17 +206,17 @@ function onMIDIMessage(event) {
     if (fastforwardListening == true) {
         fastforwardChan = channel;
         fastforwardNote = note;
-        sessionStorage.setItem( "fastforwardNote", note );
+        localStorage.setItem( "fastforwardNote", note );
         fastforwardListening = false;
         modal2.style.display = "none";
         document.getElementById('fastforward').style.backgroundColor = "transparent";
     }
 
-    if (note == sessionStorage.getItem("fastforwardNote")) {
-        fastforwardVel = vel/127;
+    if (note == localStorage.getItem("fastforwardNote")) {
+        fastforwardVel = vel;
     } 
 
-    if (fastforwardVel>0) {
+    if (fastforwardVel==127) {
         fastforward();
     }
 
@@ -249,18 +225,19 @@ function onMIDIMessage(event) {
     if (loopListening == true) {
     	loopChan = channel;
     	loopNote = note;
-        sessionStorage.setItem( "loopNote", note );
+        localStorage.setItem( "loopNote", note );
     	loopListening = false;
     	modal2.style.display = "none";
         document.getElementById('loop').style.backgroundColor = "transparent";
     }
 
-    if (note == sessionStorage.getItem("loopNote")) {
-    	loopVel = vel/127;
+    if (note == localStorage.getItem("loopNote")) {
+    	loopVel = vel;
     } 
 
-    if (loopVel>0) {
+    if (loopVel==127) {
     	loop();
+        if (true) {}
     }
 
 
@@ -268,13 +245,13 @@ function onMIDIMessage(event) {
     if (playbackListening == true) {
     	playbackChan = channel;
     	playbackVel = vel;
-        sessionStorage.setItem( "playbackNote", note );
+        localStorage.setItem( "playbackNote", note );
     	playbackListening = false;
     	modal2.style.display = "none";
         document.getElementById('playback').style.backgroundColor = "transparent";
     }
 
-    if (note == sessionStorage.getItem("playbackNote")) {
+    if (note == localStorage.getItem("playbackNote")) {
 		
 		playbackVel = Math.round((vel/127)*4);
   
@@ -282,20 +259,27 @@ function onMIDIMessage(event) {
     }
 
 
+
 //loop size
     if (sizeListening == true) {
     	sizeChan = channel;
     	sizeVel = vel;
-        sessionStorage.setItem( "sizeNote", note );
+        localStorage.setItem( "sizeNote", note );
     	sizeListening = false;
     	modal2.style.display = "none";
         
         document.getElementById('width').style.backgroundColor = "transparent";
     }
 
-    if (note == sessionStorage.getItem("sizeNote")) {
+    if (note == localStorage.getItem("sizeNote")) {
 		
-		loopSize = (vel/127) + 0.01;
+		loopSize = (vel/127) + 0.02;
+        loopSizeChanged(loopSize)
+        console.log(loopSize);
+
+    }
+    function loopSizeChanged(loopSize) {
+        loop()
 
     }
 
@@ -304,14 +288,14 @@ function onMIDIMessage(event) {
     if (volListening == true) {
         volChan = channel;
         volVel = vel;
-        sessionStorage.setItem( "volNote", note );
+        localStorage.setItem( "volNote", note );
         volListening = false;
         modal2.style.display = "none";
         document.getElementById('vol').style.backgroundColor = "transparent";
 
     }
 
-    if (note == sessionStorage.getItem("volNote")) {
+    if (note == localStorage.getItem("volNote")) {
         
         vol();
         volume = Math.round((vel/127) * 100);
@@ -331,23 +315,6 @@ function onMIDIMessage(event) {
 var modal2 = document.getElementById("modal2");
 var close2 = document.getElementById("close2");	
 
-
-// open new window !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-function openNewWindowMIDI(){
-
-    var img = document.getElementById('new');
-    img.style.backgroundColor = "#ff0002";
-    newWindowListening = true;
-
-    modal2 = document.getElementById("modal2");
-    close2 = document.getElementById("close2");     
-
-    modal2.style.display = "block";
-    close2.onclick = function() {
-        modal2.style.display = "none";
-        img.style.backgroundColor = "transparent";
-    }
-}
 
 
 function playMIDI(target) {

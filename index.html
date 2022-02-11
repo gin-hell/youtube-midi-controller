@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html id="cloneThis">
+<html>
     <head>
-    	<title>YouTube</title>
+    	<title>NOT YouTube</title>
         <meta charset="UTF-8">
         <meta description="YOU TUBE">
         <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -19,17 +19,16 @@
 
 
         <div class="div-stuff">
-            <img id="show" src="imgs/youtube-full.png">
         	<input id="search" autocapitalize="none" autocomplete="off" autocorrect="off" autofocus="" name="search_query" tabindex="0" type="text" spellcheck="false" placeholder="Search" style="outline: none;">
-            <button id="button" onclick="search()"><img src="imgs/search.png"></button>
+            <button id="search-button" onclick="search()">🔍</button>
         </div>
 
         <div id="container">
-            <div id="player"></div>    
+            <div id="player"></div>   
+            <!-- <div id="player-placeholder"></div> -->
         </div>
 
         <div id = "icons">
-            <img id="new" src="imgs/new-window.png" onclick="openNewWindowMIDI()" title="New Player Window">
             <img id="prev" src="imgs/skip-back.png" onclick="prevMIDI()" title="Previous Video">
             <img id="rewind" src="imgs/rewind.png" onclick="rewindMIDI()" title="Skip Back One Second">
             <img id="pause" src="imgs/pause.png" onclick="pauseMIDI()" title="Pause">
@@ -47,23 +46,32 @@
             <select id="selector" onchange="selection()">
                 <option value="0"> Search for a video above </option>
             </select>
+
+            <select id="inputselector" onchange="">
+                <option value="0"> Connect a MIDI controller </option>
+            </select>
+            <button id="show">Open Help Window</button>
         </div>
+
+        <div id="footer">
+            <img id="logo" src="imgs/developed-with-youtube.png">
+        </div>
+
 
         <div id="modal">    
             <div id="modal-inner"> 
                 
-                <h1> www.yyyyytube.com </h1>
+                <h1> NASDAQUIRI . COM </h1>
 
-                <p style="font-family: Roboto, Arial, sans-serif;
-                
-                    "
-                    >www.yyyyyoutube.com is a web application that allowers users control YouTube video playback parameters using a USB MIDI controller</p>
+                <p style="font-family: Roboto, Arial, sans-serif;">
+
+                NASDAQUIRI.COM is a web application that allowers users control YouTube video playback parameters using a USB MIDI controller</p>
 
                 <p>How to get started:</p>
                 <ul>
                     <li> Connect USB MIDI device, then reload the page </li>
 
-                    <li> Click on a playback parameter icon below && then move a knob/button on yr MIDI controller to assign it to a plackback function ~~ reassign the parameter  by clicking && moving a new knob/button </li>
+                    <li> Click on a playback parameter icon below & then move a knob/button on yout MIDI controller to assign it to a plackback function ~~ reassign the parameter by clicking the icon & moving a new knob/button </li>
 
                     <li>Video control functions, in order of the icons below the viewer, are:
                         <ul id="sublist">
@@ -80,7 +88,7 @@
                         </ul>
                     </li>
 
-                    <li> The playback rate, loop size, && volume are control values (knobs); all other parameters are on/off (buttons) </li>
+                    <li> The playback rate, loop size, & volume are control values (knobs); all other parameters are on/off (buttons) </li>
 
                     <li> Don't forget to set a loop size before triggering a loop, otherwise you'll be asking the app to make a loop with a null size! </li>
 
@@ -88,13 +96,15 @@
 
                     <li> The drop-down menu below the video player will display the top five results (based on YouTube's rating algorithms) matching your search terms; select a title to begin playback </li>
 
-                    <li> If you want to see this information after closing this window, click on the YouTube logo at the top of the page</li>
+                    <li> If you want to see this information after closing this window, click on the YouTube logo at the bottom of the page</li>
                 </ul>
                 <p>For more info or to check out the code, visit the <a href="https://github.com/gin-hell/youtube-midi-controller" target="blank" style="color:#ff0002">GitHub repo</a></p>
 
                 <button id="close">close</button>
             </div>
         </div>
+
+
 
         <div id="modal2">    
             <div id="modal-inner2"> 
@@ -124,12 +134,12 @@
 
 
             var modal = document.getElementById('modal');
-            modal.style.display = sessionStorage.getItem("display")
+            modal.style.display = localStorage.getItem("display")
             
             var close = document.getElementById('close');
             close.onclick = function(){
-                sessionStorage.setItem("display", "none");
-                modal.style.display = sessionStorage.getItem("display")
+                localStorage.setItem("display", "none");
+                modal.style.display = localStorage.getItem("display")
             }
 
             var show = document.getElementById('show');
@@ -142,14 +152,11 @@
             document.addEventListener("keyup", function(event){
 
                 if(event.keyCode == 27){
-                    sessionStorage.setItem("display", "none");
-                    modal.style.display = sessionStorage.getItem("display")
+                    localStorage.setItem("display", "none");
+                    modal.style.display = localStorage.getItem("display")
                 }
-
-                // if(event.keyCode == 192){
-                //     var myWindow = window.open("newWindowIndex.html", "", "innerWidth=640, innerHeight=375, scrollbars=no, status=no left="+ Math.random()*(window.innerWidth)+", top="+ Math.random()*(window.innerHeight)+"");
-                // }
             });
+
          </script>
 
 
